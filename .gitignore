@@ -1,0 +1,4 @@
+.env
+music_vector_db/
+src/dashboard_data.json
+__pycache__/

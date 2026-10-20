@@ -1,0 +1,36 @@
+song_id,title,artist,album,genre,language,year,track_number,duration,danceability,energy,valence,acousticness,tempo_norm
+S1,Bleach,5 Seconds of Summer,5SOS5,Pop-rock,English,2022,1,3:35,0.50,0.78,0.42,0.04,0.55
+S2,Complete Mess,5 Seconds of Summer,5SOS5,Pop-rock,English,2022,2,3:12,0.52,0.80,0.38,0.03,0.63
+S3,Starting Line,Luke Hemmings,When Facing The Things We Turn Away From,Alternative,English,2021,3,3:22,0.58,0.55,0.40,0.25,0.42
+S4,Blinding Lights,The Weeknd,After Hours,R&B,English,2020,4,3:20,0.51,0.80,0.33,0.00,0.93
+S5,Don't Start Now,Dua Lipa,Future Nostalgia,Dance-pop,English,2020,5,3:03,0.79,0.80,0.68,0.02,0.53
+S6,She Looks So Perfect,5 Seconds of Summer,5 Seconds of Summer,Pop-rock,English,2014,1,3:22,0.52,0.89,0.80,0.01,0.83
+S7,Youngblood,5 Seconds of Summer,Youngblood,Pop-rock,English,2018,2,3:23,0.60,0.85,0.30,0.03,0.50
+S8,Motion,Luke Hemmings,When Facing The Things We Turn Away From,Alternative,English,2021,4,3:15,0.55,0.60,0.35,0.20,0.48
+S9,Place in Me,Luke Hemmings,When Facing The Things We Turn Away From,Alternative,English,2021,7,3:30,0.50,0.45,0.30,0.45,0.33
+S10,Repeat,Luke Hemmings,When Facing The Things We Turn Away From,Alternative,English,2021,9,3:10,0.52,0.50,0.25,0.30,0.38
+S11,Starboy,The Weeknd,Starboy,R&B,English,2016,1,3:50,0.68,0.59,0.49,0.17,0.27
+S12,Save Your Tears,The Weeknd,After Hours,R&B,English,2020,11,3:35,0.68,0.83,0.64,0.02,0.48
+S13,Can't Feel My Face,The Weeknd,Beauty Behind the Madness,R&B,English,2015,3,3:33,0.76,0.70,0.58,0.01,0.40
+S14,Levitating,Dua Lipa,Future Nostalgia,Dance-pop,English,2020,5,3:23,0.70,0.83,0.92,0.00,0.36
+S15,Physical,Dua Lipa,Future Nostalgia,Dance-pop,English,2020,6,3:13,0.65,0.84,0.76,0.01,0.73
+S16,New Rules,Dua Lipa,Dua Lipa,Dance-pop,English,2017,13,3:29,0.76,0.70,0.61,0.00,0.47
+S17,24K Magic,Bruno Mars,24K Magic,Funk,English,2016,1,3:46,0.80,0.80,0.63,0.03,0.39
+S18,That's What I Like,Bruno Mars,24K Magic,Funk,English,2016,4,3:26,0.85,0.57,0.71,0.05,0.62
+S19,Treasure,Bruno Mars,Unorthodox Jukebox,Funk,English,2012,5,2:58,0.87,0.69,0.94,0.04,0.47
+S20,Uptown Funk,Mark Ronson,Uptown Special,Funk,English,2015,4,4:30,0.88,0.61,0.93,0.01,0.46
+S21,Lose Yourself,Eminem,8 Mile (Soundtrack),Hip-hop,English,2002,1,5:26,0.69,0.74,0.06,0.01,0.93
+S22,Without Me,Eminem,The Eminem Show,Hip-hop,English,2002,4,4:50,0.91,0.67,0.66,0.00,0.43
+S23,Stan,Eminem,The Marshall Mathers LP,Hip-hop,English,2000,3,6:44,0.78,0.76,0.52,0.05,0.17
+S24,Not Afraid,Eminem,Recovery,Hip-hop,English,2010,7,4:08,0.55,0.88,0.10,0.01,0.85
+S25,Smooth Criminal (Cover),Marcin,YouTube Covers,Acoustic,English,2020,1,4:15,0.60,0.35,0.50,0.85,0.48
+S26,Hotel California (Cover),Marcin,YouTube Covers,Acoustic,English,2020,2,5:30,0.45,0.30,0.35,0.88,0.13
+S30,Can We Dance,The Vamps,Meet The Vamps,Pop-rock,English,2014,2,3:11,0.70,0.65,0.55,0.20,0.50
+S31,Wild Heart,The Vamps,Meet The Vamps,Pop-rock,English,2014,3,3:11,0.65,0.75,0.60,0.15,0.55
+S32,Somebody To You,The Vamps,Meet The Vamps,Pop-rock,English,2014,5,3:03,0.60,0.70,0.65,0.18,0.48
+S33,In the End,Linkin Park,Hybrid Theory,Rock,English,2000,8,3:36,0.56,0.86,0.40,0.01,0.38
+S34,Numb,Linkin Park,Meteora,Rock,English,2003,13,3:07,0.50,0.86,0.24,0.00,0.42
+S35,Somewhere I Belong,Linkin Park,Meteora,Rock,English,2003,3,3:33,0.50,0.90,0.30,0.00,0.80
+S38,As It Was,Harry Styles,Harry's House,Dance-pop,English,2022,4,2:47,0.52,0.73,0.66,0.34,0.95
+S39,Watermelon Sugar,Harry Styles,Fine Line,Dance-pop,English,2019,2,2:54,0.55,0.82,0.56,0.12,0.29
+S40,Yellow,Coldplay,Parachutes,Rock,English,2000,5,4:29,0.43,0.66,0.28,0.00,0.45

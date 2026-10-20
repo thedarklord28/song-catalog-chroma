@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Catalog Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #fcfbfa;
+            --bg-card: #ffffff;
+            --text-main: #2d2a29;
+            --text-muted: #8c8581;
+            --border-color: #f0edea;
+            
+            /* Pastel Accent Palette */
+            --pastel-pink: #ffdce3;
+            --pastel-blue: #d6ebff;
+            --pastel-purple: #e3d9fc;
+            --pastel-green: #d2f5e3;
+            --pastel-yellow: #fff3cd;
+            
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 2rem;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Style */
+        header {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            background-color: var(--pastel-green);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1b5e3a;
+            letter-spacing: -0.01em;
+        }
+
+        /* Stats Row Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        .stat-card.pink::before { background-color: var(--pastel-pink); }
+        .stat-card.blue::before { background-color: var(--pastel-blue); }
+        .stat-card.purple::before { background-color: var(--pastel-purple); }
+        .stat-card.yellow::before { background-color: var(--pastel-yellow); }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Recommendation Section Panel Layout */
+        .dashboard-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .user-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+        }
+
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .user-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+        }
+        
+        .user-panel.u1 .user-badge { background-color: var(--pastel-blue); color: #1d4ed8; }
+        .user-panel.u5 .user-badge { background-color: var(--pastel-purple); color: #6d28d9; }
+
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            background-color: #faf9f8;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .track-item:hover {
+            border-color: var(--border-color);
+            background-color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            max-width: 70%;
+        }
+
+        .track-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .track-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .track-metrics {
+            text-align: right;
+        }
+
+        .metric-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .distance-val {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-family: monospace;
+        }
+
+        /* Acoustic Insights Table Layout */
+        .table-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #faf9f8;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 1rem 1.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #fdfdfd;
+        }
+
+        .badge-genre {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: var(--pastel-yellow);
+            color: #854d0e;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Music Catalog Insights</h1>
+            <p>Hybrid Vector Analytics & Relational Database Pipeline</p>
+        </div>
+        <div class="status-badge">Oracle FreeSQL Connected</div>
+    </header>
+
+    <!-- Operational System Statistics Dashboard Row -->
+    <div class="stats-grid">
+        <div class="stat-card pink">
+            <div class="stat-label">Synchronized Songs</div>
+            <div class="stat-value">36</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-label">User Interactions</div>
+            <div class="stat-value">40</div>
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-label">Vector Dimensions</div>
+            <div class="stat-value">5D</div>
+        </div>
+        <div class="stat-card yellow">
+            <div class="stat-label">Distance Spaces</div>
+            <div class="stat-value">L2 Euclidean</div>
+        </div>
+    </div>
+
+    <!-- Hybrid Content Mapping Outputs Panel -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Vector Proximity Recommendations (Midpoint Matrix)</h2>
+        <div class="rec-grid">
+            
+            <!-- User 1 Interface Box -->
+            <div class="user-panel u1">
+                <div class="user-header">
+                    <div class="user-title">User Profile 1</div>
+                    <span class="user-badge">Tom's Mix</span>
+                </div>
+                <div class="track-list">
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">Save Your Tears</span>
+                            <span class="track-meta">The Weeknd &bull; R&B</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #11</span>
+                            <div class="distance-val">dist: 0.0507</div>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">Somebody To You</span>
+                            <span class="track-meta">The Vamps &bull; Pop-rock</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #5</span>
+                            <div class="distance-val">dist: 0.0666</div>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">New Rules</span>
+                            <span class="track-meta">Dua Lipa &bull; Dance-pop</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #13</span>
+                            <div class="distance-val">dist: 0.0788</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User 5 Interface Box -->
+            <div class="user-panel u5">
+                <div class="user-header">
+                    <div class="user-title">User Profile 5</div>
+                    <span class="user-badge">Maya's Mix</span>
+                </div>
+                <div class="track-list">
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">Can We Dance</span>
+                            <span class="track-meta">The Vamps &bull; Pop-rock</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #2</span>
+                            <div class="distance-val">dist: 0.0448</div>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">Somebody To You</span>
+                            <span class="track-meta">The Vamps &bull; Pop-rock</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #5</span>
+                            <div class="distance-val">dist: 0.0622</div>
+                        </div>
+                    </div>
+                    <div class="track-item">
+                        <div class="track-info">
+                            <span class="track-name">Starboy</span>
+                            <span class="track-meta">The Weeknd &bull; R&B</span>
+                        </div>
+                        <div class="track-metrics">
+                            <span class="metric-badge">Track #1</span>
+                            <div class="distance-val">dist: 0.0836</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Acoustic Waveform Identification Panel -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Acoustic Parameter Index Anomalies</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Song Title</th>
+                        <th>Artist Context</th>
+                        <th>Genre Classification</th>
+                        <th>Acousticness</th>
+                        <th>Energy Vector</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S40</td>
+                        <strong><td>Yellow</td></strong>
+                        <td>Coldplay</td>
+                        <td><span class="badge-genre">Rock</span></td>
+                        <td>0.00</td>
+                        <td>0.66</td>
+                    </tr>
+                    <tr>
+                        <td>S1</td>
+                        <strong><td>Bleach</td></strong>
+                        <td>5 Seconds of Summer</td>
+                        <td><span class="badge-genre">Pop-rock</span></td>
+                        <td>0.04</td>
+                        <td>0.78</td>
+                    </tr>
+                    <tr>
+                        <td>S26</td>
+                        <strong><td>Hotel California (Cover)</td></strong>
+                        <td>Marcin</td>
+                        <td><span class="badge-genre">Acoustic</span></td>
+                        <td>0.88</td>
+                        <td>0.30</td>
+                    </tr>
+                    <tr>
+                        <td>S21</td>
+                        <strong><td>Lose Yourself</td></strong>
+                        <td>Eminem</td>
+                        <td><span class="badge-genre">Hip-hop</span></td>
+                        <td>0.01</td>
+                        <td>0.74</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
