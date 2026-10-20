@@ -4,60 +4,82 @@ An interactive full-stack recommendation engine and vector space visualization d
 
 Built with Python, ChromaDB, Oracle FreeSQL, Pandas, and React.
 
----
+## How it works
 
-## Key Features
-- **Vector Space Indexing:** Leverages ChromaDB with HNSW index spaces to compute geometric Euclidean distances between tracks.
-- **Hybrid Recommendation Engine:** Generates real-time song similarity matches and aggregates explicit user review data (`user_likes.csv`) to compute user taste profile midpoints.
-- **Multi-Attribute Filtering:** Filter catalogs and recommendations dynamically by **Genre**, **Artist**, and **Decade**.
-- **Interactive React Dashboard:** Features a Cartesian coordinate plotting plane and dynamic track fingerprint visualizers.
-- **Database Fallback:** Automatically connects to Oracle Cloud FreeSQL; falls back to a local robust dataset (`songs_dataset.csv`) if a connection timeout or network issue occurs.
+```
+Oracle Cloud FreeSQL (or local backups)
+        |
+    run_pipeline.py  ->  fetches tracks, embeds vectors, exports JSON
+        |
+    ChromaDB (HNSW index space)  ->  computes geometric Euclidean distances
+        |
+    +-- Hybrid recommendation engine (real-time matches + user_likes.csv)
+    +-- Multi-attribute filtering (Genre, Artist, Decade)
+    +-- Interactive React dashboard (Cartesian coordinate plane + track fingerprint visualizers)
 
----
+```
+
+**Key Features**
+
+* **Vector Space Indexing:** Leverages ChromaDB with HNSW index spaces to compute geometric Euclidean distances between tracks.
+* **Hybrid Recommendation Engine:** Generates real-time song similarity matches and aggregates explicit user review data (`user_likes.csv`) to compute user taste profile midpoints.
+* **Multi-Attribute Filtering:** Filter catalogs and recommendations dynamically by **Genre**, **Artist**, and **Decade**.
+* **Interactive React Dashboard:** Features a Cartesian coordinate plotting plane and dynamic track fingerprint visualizers.
+* **Database Fallback:** Automatically connects to Oracle Cloud FreeSQL; falls back to a local robust dataset (`songs_dataset.csv`) if a connection timeout or network issue occurs.
 
 ## Tech Stack
-- **Backend / Pipeline:** Python, Pandas, NumPy, ChromaDB, OracleDB (`oracledb`), `python-dotenv`
-- **Frontend:** React, JavaScript, CSS Grid/Flexbox
-- **Data Storage:** Local CSV backups, ChromaDB persistent vector store
 
----
+* **Backend / Pipeline:** Python, Pandas, NumPy, ChromaDB, OracleDB (`oracledb`), `python-dotenv`
+* **Frontend:** React, JavaScript, CSS Grid/Flexbox
+* **Data Storage:** Local CSV backups, ChromaDB persistent vector store
 
 ## Getting Started
 
 ### 1. Clone the Repository
+
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
+
 ```
 
 ### 2. Set Up the Python Backend & Dependencies
+
 Install the required packages:
+
 ```bash
 pip install chromadb numpy pandas oracledb python-dotenv
+
 ```
 
 Create a `.env` file in your root directory to securely store your Oracle Cloud FreeSQL database credentials:
+
 ```env
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
 DB_DSN=your_oracle_dsn
+
 ```
 
 Run the pipeline script to fetch data, configure the vector database, and generate the React dashboard payload:
+
 ```bash
 python run_pipeline.py
+
 ```
 
 ### 3. Run the Frontend Dashboard
+
 Navigate into your React project directory, install dependencies, and start the development server:
+
 ```bash
 npm install
 npm run dev
+
 ```
 
----
-
 ## Project Structure
+
 ```text
 project-song-catalog/                 <-- Main Root Project Folder
 │
@@ -80,9 +102,19 @@ project-song-catalog/                 <-- Main Root Project Folder
 ├── run_pipeline.py                   <-- Core Python Script (Connects to FreeSQL, embeds vectors, exports JSON)
 ├── songs_dataset.csv                 <-- Local offline track backup file
 └── user_likes.csv                    <-- Local offline user reviews file
+
 ```
 
----
+## Troubleshooting
+
+| Problem | Fix |
+| --- | --- |
+| Oracle connection timeout or failure | Check your `.env` credentials (`DB_USER`, `DB_PASSWORD`, `DB_DSN`). The pipeline automatically falls back to `songs_dataset.csv`. |
+| `No module named ...` | Ensure your environment is active and run `pip install chromadb numpy pandas oracledb python-dotenv`. |
+| React dashboard displays empty or missing data | Ensure `python run_pipeline.py` ran successfully to generate or update `src/dashboard_data.json`. |
+| ChromaDB persistent storage errors | Delete the `music_vector_db/` folder to allow ChromaDB to regenerate the index on the next run. |
+| Vite dev server fails to start | Run `npm install` inside your project directory to re-install frontend package dependencies. |
 
 ## License
-This project is open-source and available under the [MIT License](LICENSE).
+
+This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
